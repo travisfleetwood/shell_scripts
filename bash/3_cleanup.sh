@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # list packages that are no longer required
 pacman -Qtdq
@@ -8,6 +8,9 @@ read -p "Are you sure you want to remove the packages listed above? (y/n) " -n 1
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    sudo pacman -R $(pacman -Qtdq)
+    sudo pacman -Rns $(pacman -Qtdq)
     echo "Packages removed successfully."
 fi
+
+# Clear cache
+sudo paccache -rk3
